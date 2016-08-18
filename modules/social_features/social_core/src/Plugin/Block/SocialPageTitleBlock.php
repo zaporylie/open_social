@@ -35,6 +35,7 @@ class SocialPageTitleBlock extends PageTitleBlock {
       $author = $node->getOwner();
       $author_name = $author->link();
       $group_link = NULL;
+      $default_page_title = NULL;
 
       switch ($node->getType()) {
         case 'topic':
@@ -50,24 +51,43 @@ class SocialPageTitleBlock extends PageTitleBlock {
           $group_link = $this->getGroupLink($node);
           break;
 
+        case 'basic_page':
+          // @todo make link to events overview.
+          $topic_type = NULL;
+          $hero_node = NULL;
+          $default_page_title = TRUE;
+          break;
+
+        case 'book':
+          // @todo make link to events overview.
+          $topic_type = NULL;
+          $hero_node = NULL;
+          $default_page_title = TRUE;
+          break;
+
         default:
           $topic_type = NULL;
           $hero_node = NULL;
+          $default_page_title = TRUE;
       }
 
       return [
         '#theme' => 'page_hero_data',
+        '#type' => 'page_title',
         '#title' => $title,
+        '#default_page_title' => $default_page_title,
         '#author_name' => $author_name,
         '#created_date' => $node->getCreatedTime(),
         '#topic_type' => $topic_type,
         '#group_link' => $group_link,
         '#hero_node' => $hero_node,
         '#section_class' => 'page-title',
+        '#theme_hook_suggestions' => array('page_title'),
       ];
     }
     else {
       $request = \Drupal::request();
+      $default_page_title = TRUE;
 
       if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
         $title = \Drupal::service('title_resolver')->getTitle($request, $route);

@@ -1,111 +1,115 @@
 // Layout and behaviour overrides
 
-.navbar-nav {
-  margin: 0;
-}
-
 .navbar-fixed-top {
-  top: auto;
-  z-index: 200;
-}
 
-.navbar-header {
-  @include MQ($small) {
-    float: right;
+  .navbar-nav {
+    margin: 0;
   }
-}
 
-.navbar-right .dropdown-menu {
-  right: 0;
-  left: auto;
-}
+  .navbar-fixed-top {
+    top: auto;
+    z-index: 200;
+  }
 
-.navbar > .container .navbar-brand {
-  margin-left: -$navbar-padding-horizontal;
-}
+  .navbar-header {
+    @include MQ($small) {
+      float: right;
+    }
+  }
 
-@media (min-width: $grid-float-breakpoint) {
+  .navbar-right .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
 
   .navbar > .container .navbar-brand {
-    margin-left: 0;
+    margin-left: -$navbar-padding-horizontal;
   }
 
-  .container > .navbar-collapse {
-    margin-left: 60px; // make sure navbar-brand is clickable
-  }
+  @media (min-width: $grid-float-breakpoint) {
 
-  .navbar-right {
-    margin-right: 0;
-  }
+    .navbar > .container .navbar-brand {
+      margin-left: 0;
+    }
 
-}
+    .container > .navbar-collapse {
+      margin-left: 60px; // make sure navbar-brand is clickable
+    }
+
+    .navbar-right {
+      margin-right: 0;
+    }
+
+  }
 
 //
 
-@media (max-width: $grid-float-breakpoint-max) {
-  // Dropdowns get same display when collapsed
-  // This is an override of bootstrap navbar line 241
-  .navbar-nav .open .dropdown-menu {
-    position: absolute;
-    margin-top: 0;
-    background-color: $dropdown-bg;
-    border: 0;
-    @include box-shadow(0 6px 12px rgba(0,0,0,.175));
-  }
-
-  .navbar-fixed-top .navbar-nav .open .dropdown-menu {
-    position: fixed;
-    top: auto;
-    margin: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: none;
-    max-height: 100%;
-    height: calc(100% - 50px);
-    overflow-x: hidden;
-    overflow-y: auto;
-    backface-visibility: hidden;
-  }
-
-  .navbar-collapse .navbar-nav {
-    margin: ($navbar-padding-vertical / 2) (-$navbar-padding-horizontal);
-  }
-
-  .navbar-collapse {
-
-    .navbar-nav > li > a {
-      padding: 5px 15px 5px 25px;
-
-      &.dropdown-toggle {
-        pointer-events: none;
-      }
+  @media (max-width: $grid-float-breakpoint-max) {
+    // Dropdowns get same display when collapsed
+    // This is an override of bootstrap navbar line 241
+    .navbar-nav .open .dropdown-menu {
+      position: absolute;
+      margin-top: 0;
+      background-color: $dropdown-bg;
+      border: 0;
+      @include box-shadow(0 6px 12px rgba(0,0,0,.175));
     }
 
-    .dropdown-menu {
-      display: block;
-      position: relative;
+    .navbar-fixed-top .navbar-nav .open .dropdown-menu {
+      position: fixed;
+      top: auto;
+      margin: 0;
+      left: 0;
+      right: 0;
       width: 100%;
-      background-color: transparent;
-      float: none;
       max-width: none;
-      padding-top: 0;
+      max-height: 100%;
+      height: calc(100% - 50px);
+      overflow-x: hidden;
+      overflow-y: auto;
+      backface-visibility: hidden;
+    }
 
-      li a {
-        color: white;
-        padding: 5px 15px 5px 37px;
+    .navbar-collapse .navbar-nav {
+      margin: ($navbar-padding-vertical / 2) (-$navbar-padding-horizontal);
+    }
 
-        &:hover,
-        &:focus {
-          background: $brand-secondary;
+    .navbar-collapse {
+
+      .navbar-nav > li > a {
+        padding: 5px 15px 5px 25px;
+
+        &.dropdown-toggle {
+          pointer-events: none;
+        }
+      }
+
+      .dropdown-menu {
+        display: block;
+        position: relative;
+        width: 100%;
+        background-color: transparent;
+        float: none;
+        max-width: none;
+        padding-top: 0;
+
+        li a {
+          color: white;
+          padding: 5px 15px 5px 37px;
+
+          &:hover,
+          &:focus {
+            background: $brand-secondary;
+          }
+
         }
 
       }
 
     }
 
-  }
 
+  }
 
 }
 
@@ -192,7 +196,7 @@
 
 }
 
-.navbar-default {
+.navbar {
   border: 0;
   font-size: $navbar-font-size;
 
@@ -205,6 +209,7 @@
     height: 50px;
     min-width: 50px;
     margin: 0;
+    float: none;
   }
 
   .navbar-form {
@@ -212,6 +217,10 @@
     border: 0;
     margin: 6px 0;
   }
+}
+
+.navbar-brand {
+  background: $navbar-default-brand-bg;
 }
 
 .navbar-default .navbar-brand,
@@ -229,11 +238,6 @@
     height: 50px;
   }
 
-}
-
-.navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > li > a:hover {
-  background-color: $brand-secondary;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -256,8 +260,10 @@
 .navbar-default .navbar-nav > .open > a:focus,
 .navbar-default .navbar-nav > .open > a:hover {
   transition: color .2s ease, background-color .2s ease;
-  color: $gray-lightest;
-  background-color: $brand-secondary;
+}
+
+.navbar-inverse {
+  font-size: $navbar-inverse-size;
 }
 
 // Hacking into responsive bootstrap behaviour
@@ -279,11 +285,11 @@
 
 
 @include MQ($small) {
-  .navbar-nav {
+  .navbar-fixed-top .navbar-nav {
     margin-left: 10px;
   }
 
-  .navbar-nav > li.navbar-search {
+  .navbar-fixed-top .navbar-nav > li.navbar-search {
     float: right;
   }
 }

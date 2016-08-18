@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override to display a menu.
+ * Default theme implementation to display a menu.
  *
  * Available variables:
  * - menu_name: The machine name of the menu.
@@ -11,11 +11,8 @@
  *   - title: The menu link title.
  *   - url: The menu link url, instance of \Drupal\Core\Url
  *   - localized_options: Menu link localized options.
- *   - is_expanded: TRUE if the link has visible children within the current
- *     menu tree.
- *   - is_collapsed: TRUE if the link has children within the current menu tree
- *     that are not currently visible.
- *   - in_active_trail: TRUE if the link is in the active trail.
+ *
+ * @ingroup templates
  */
 #}
 {% import _self as menus %}
@@ -30,16 +27,28 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass('main-menu list-unstyled') }}>
+      <ul{{ attributes.addClass('menu', 'nav', 'navbar-nav') }}>
     {% else %}
-      <ul class="menu list-unstyled">
+      <ul{{ attributes.addClass('dropdown-menu') }}>
     {% endif %}
     {% for item in items %}
-      <li{{ item.attributes.addClass('menu__item') }}>
-        {{ link(item.title, item.url, { 'class':['menu__link']}) }}
-        {% if item.below %}
-          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
-        {% endif %}
+      {%
+        set item_classes = [
+          'expanded',
+          'dropdown',
+          item.in_active_trail ? 'active',
+        ]
+      %}
+      {% if menu_level == 0 and item.is_expanded %}
+        <li{{ item.attributes.addClass(item_classes) }}>
+        <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown">{{ item.title }} <span class="caret"></span></a>
+      {% else %}
+        <li{{ item.attributes.addClass(item_classes) }}>
+        {{ link(item.title, item.url) }}
+      {% endif %}
+      {% if item.below %}
+        {{ menus.menu_links(item.below, attributes.removeClass('nav', 'navbar-nav'), menu_level + 1) }}
+      {% endif %}
       </li>
     {% endfor %}
     </ul>

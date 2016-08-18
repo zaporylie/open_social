@@ -148,7 +148,7 @@ a.card:hover {
       height: 220px;
       flex: 0 0 220px;
       position: relative;
-      border-radius: 10px 0 0 10px;
+      border-radius: $card-border-radius 0 0 $card-border-radius;
       overflow: hidden;
       width: auto;
       padding-top: 0;
@@ -215,7 +215,7 @@ a.card:hover {
       width: 44px;
       height: 44px;
       padding: 12px;
-      border-radius: 0 0 10px 0;
+      border-radius: 0 0 $card-border-radius 0;
 
       .teaser-type-icon {
         width: 18px;

@@ -31,9 +31,42 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'roboto';
+  src: url("../../../font/roboto/RobotoCondensed-Light-webfont.eot");
+  src: url("../../../font/roboto/RobotoCondensed-Light-webfont.eot?#iefix") format('embedded-opentype'),
+       url("../../../font/roboto/RobotoCondensed-Light-webfont.woff") format('woff'),
+       url("../../../font/roboto/RobotoCondensed-Light-webfont.ttf") format('truetype'),
+       url("../../../font/roboto/RobotoCondensed-Light-webfont.svg") format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url("../../../font/roboto/RobotoCondensed-Regular-webfont.eot");
+  src: url("../../../font/roboto/RobotoCondensed-Regular-webfont.eot?#iefix") format('embedded-opentype'),
+       url("../../../font/roboto/RobotoCondensed-Regular-webfont.woff") format('woff'),
+       url("../../../font/roboto/RobotoCondensed-Regular-webfont.ttf") format('truetype'),
+       url("../../../font/roboto/RobotoCondensed-Regular-webfont.svg") format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url("../../../font/roboto/RobotoCondensed-Bold-webfont.eot");
+  src: url("../../../font/roboto/RobotoCondensed-Bold-webfont.eot?#iefix") format('embedded-opentype'),
+       url("../../../font/roboto/RobotoCondensed-Bold-webfont.woff") format('woff'),
+       url("../../../font/roboto/RobotoCondensed-Bold-webfont.ttf") format('truetype'),
+       url("../../../font/roboto/RobotoCondensed-Bold-webfont.svg") format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   line-height: 1.5;
-  font-family: 'montserrat', sans-serif;
+  font-family: "Denk One", sans-serif, sans-serif;
   font-size: 16px;
   font-weight: 300;
   color: #4d4d4d;
@@ -67,7 +100,7 @@ blockquote {
 }
 
 a {
-  color: #29abe2;
+  color: #02467f;
 }
 
 ul,
@@ -176,7 +209,7 @@ a > img {
   padding: 1px;
   margin: 1px;
   border: none;
-  outline: 1px solid #1f80aa;
+  outline: 1px solid #8482bc;
 }
 
 @media screen and (min-width: 960px) {

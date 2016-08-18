@@ -18,6 +18,29 @@
  * - hero_node
  */
 #}
+{% if default_page_title %}
+{%
+  set classes = [
+    'h4 section-title',
+    stream ? 'section-title-stream',
+  ]
+%}
+
+{% if node and not edit %}
+
+  {% set extra_classes = [
+    'section-title-node',
+    ]
+  %}
+
+{% endif %}
+
+
+{% if title %}
+  <h1{{ title_attributes.addClass(classes, extra_classes) }}>{{ title }}</h1>
+{% endif %}
+{% else %}
+
 {% if hero_styled_image_url %}
 <div style="background-image: url('{{ hero_styled_image_url }}')" class="cover cover-img cover-img-gradient">
 {% else %}
@@ -111,3 +134,4 @@
 </div>
 {% endif %}
 </div>
+{% endif %}

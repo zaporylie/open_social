@@ -26,6 +26,7 @@ function social_core_theme() {
         'topic_type' => NULL,
         'group_link' => NULL,
         'hero_node' => NULL,
+        'default_page_title' => NULL,
         'section_class' => NULL,
         'event_enrollment' => NULL,
         'visibility_icon' => NULL,
@@ -131,6 +132,10 @@ function template_preprocess_page_hero_data(&$variables) {
     else {
       $variables['topic_type'] = NULL;
     }
+  }
+
+  if (!empty($variables['default_page_title'])) {
+    $variables['node'] = TRUE;
   }
 }
 

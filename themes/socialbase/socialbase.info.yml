@@ -47,8 +47,11 @@ regions:
   header: Header
   breadcrumb: Breadcrumb
   hero: Hero
+  title: Page Title
   secondary_navigation: Secondary navigation
+  content_top: Content Top
   content: Content
+  content_bottom: Content Bottom
   complementary: Complementary
   footer: Footer
 # Comment (remove) regions_hidden part in your subtheme.

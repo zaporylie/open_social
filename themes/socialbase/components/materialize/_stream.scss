@@ -116,6 +116,7 @@
     display: none;
   }
 
+
 }
 
 
@@ -125,6 +126,10 @@
 
   @include MQ($small) {
     height: 200px; // matches width of image
+  }
+
+  &:last-child {
+    margin-bottom: -15px;
   }
 
   .card-image {

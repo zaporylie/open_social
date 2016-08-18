@@ -135,6 +135,16 @@ function socialbase_form_alter(&$form, FormStateInterface $form_state, $form_id)
     $form['#attributes']['class'][] = 'card';
     $form['info_text']['#suffix'] = '</div></div>';
   }
+
+  if ($form_id == 'contact_message_general_contact_form_form') {
+    $form['#attributes']['class'][] = 'card';
+    $form['actions']['#prefix'] = '</div></div>';
+  }
+
+  if ($form_id == 'user_register_form' || $form_id == 'social_user_login_form' ||  $form_id == 'social_user_password_form' ) {
+    $form['#attributes']['class'][] = 'card';
+    $form['actions']['#prefix'] = '</div></div>';
+  }
 }
 
 
@@ -200,6 +210,16 @@ function socialbase_theme_suggestions_block_alter(array &$suggestions, array $va
 function socialbase_preprocess_block(&$variables) {
   $profile_user_id = \Drupal::routeMatch()->getParameter('user');
   $group = \Drupal::routeMatch()->getParameter('group');
+  $block = \Drupal\block\Entity\Block::load($variables['elements']['#id']);
+
+
+  $variables['card'] = FALSE;
+  $region = $block->getRegion();
+  $regions_card = ['complementary', 'content_top', 'content_bottom'];
+
+  if (in_array($region, $regions_card)) {
+    $variables['card'] = TRUE;
+  }
 
   if (!is_null($profile_user_id) && is_object($profile_user_id)) {
     $profile_user_id = $profile_user_id->id();
@@ -267,7 +287,6 @@ function socialbase_preprocess_block(&$variables) {
 
   // Add Group ID for "See all groups link".
   if ($variables['attributes']['id'] === 'block-views-block-group-members-block-newest-members') {
-    $group = \Drupal::routeMatch()->getParameter('group');
     $variables['group_id'] = $group->id();
   }
 
@@ -431,7 +450,7 @@ function socialbase_preprocess_container(&$variables) {
 function socialbase_preprocess_page_title(&$variables) {
   // Get the current path and if is it stream return a variable.
   $current_path = \Drupal::service('path.current')->getPath();
-  if (strpos($current_path, 'stream') !== FALSE) {
+  if (strpos($current_path, 'stream') !== FALSE || strpos($current_path, 'explore') !== FALSE) {
     $variables['stream'] = TRUE;
   }
 
@@ -695,6 +714,8 @@ function socialbase_preprocess_field(&$variables) {
  * Implements hook_preprocess_page().
  */
 function socialbase_preprocess_page(&$variables) {
+  $variables['page_title'] = TRUE;
+
   // If we have the admin toolbar on screen we need overrides for our styles.
   if ($variables['is_admin']) {
     $variables['#attached']['library'][] = 'socialbase/admin';
@@ -706,6 +727,16 @@ function socialbase_preprocess_page(&$variables) {
 
   $svg = file_get_contents(drupal_get_path('theme', 'socialbase') . '/images/icons.svg');
   $variables['svg_icons'] = t('svg', array('svg' => $svg));
+
+
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {;
+    $content_type = $node->bundle();
+
+    if ( $content_type == 'event' || $content_type == 'topic') {
+      $variables['page_title'] = FALSE;
+    }
+  }
+
 }
 
 
